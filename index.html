@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fifaliana Valea - Portfolio</title>
+    <style>
+        /* Reset et styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            color: #1a202c;
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ============================================================ */
+        /* SIDEBAR */
+        /* ============================================================ */
+        .sidebar {
+            width: 260px;
+            background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+            color: #e2e8f0;
+            padding: 30px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 0 20px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3182ce;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(49,130,206,0.4);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.15rem;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.8rem;
+            color: #a0aec0;
+            margin-top: 2px;
+        }
+
+        .sidebar-nav {
+            padding: 0 15px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cbd5e0;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(49,130,206,0.15);
+            color: #ffffff;
+            border-left-color: #3182ce;
+            transform: translateX(4px);
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(49,130,206,0.25);
+            color: #ffffff;
+            border-left-color: #3182ce;
+        }
+
+        .sidebar-nav a .nav-icon {
+            font-size: 1.1rem;
+            width: 22px;
+            text-align: center;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 15px 20px;
+        }
+
+        .cv-download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 20px 0;
+            padding: 13px 16px;
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(49,130,206,0.35);
+        }
+
+        .cv-download-btn:hover {
+            background: linear-gradient(135deg, #2b6cb0, #1a4f7a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(49,130,206,0.5);
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.72rem;
+            color: #718096;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* Menu burger pour mobile */
+        .burger-menu {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
+            background: #1a202c;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        /* ============================================================ */
+        /* CONTENU PRINCIPAL */
+        /* ============================================================ */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 20px;
+            width: calc(100% - 260px);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* ============================================================ */
+        /* STYLES POUR L'IMPRESSION / PDF EN PAYSAGE */
+        /* ============================================================ */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 12mm 10mm;
+            }
+
+            body {
+                background: #f0f4f8;
+                margin: 0;
+                padding: 5px;
+                font-size: 11pt;
+                display: block;
+            }
+
+            .sidebar, .burger-menu, .overlay, .cv-download-btn {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 10px;
+            }
+
+            #competences, #experiences, #projets { 
+                page-break-before: always; 
+                page-break-after: avoid; 
+            }
+            #apropos { page-break-before: avoid; }
+            
+            .section {
+                box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+                border: 2px solid #cbd5e0;
+                border-radius: 10px;
+                margin-bottom: 18px;
+                padding: 20px 25px;
+                background: white;
+                page-break-inside: avoid;
+            }
+
+            header {
+                border-radius: 10px;
+                padding: 30px 0 25px;
+                background: linear-gradient(135deg, #2d3748, #1a202c);
+                margin-bottom: 18px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+                page-break-after: avoid;
+                border: 2px solid #2d3748;
+            }
+            header h1 { 
+                color: #ffffff !important; 
+                font-size: 2.4rem; 
+                font-weight: 700; 
+            }
+            header p { 
+                color: #cbd5e0 !important; 
+                font-size: 1.1rem; 
+            }
+
+            .grid-2, .grid-3, .project-detail, .skill-card, .experience-item, .project-item { 
+                page-break-inside: avoid; 
+            }
+
+            .skill-card { 
+                border-left: 5px solid #3182ce; 
+                background: #f7fafc; 
+                padding: 14px 16px; 
+                border-radius: 8px; 
+            }
+
+            .experience-item, .project-item { 
+                background: #f7fafc; 
+                padding: 14px 18px; 
+                border-radius: 8px; 
+                border: 2px solid #e2e8f0; 
+                margin-bottom: 12px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .project-image-placeholder { 
+                background: linear-gradient(135deg, #3182ce, #2b6cb0); 
+                color: white; 
+                padding: 8px 12px; 
+                border-radius: 4px; 
+                text-align: center; 
+                font-weight: 600; 
+                font-size: 0.8rem; 
+                margin-bottom: 8px;
+                display: inline-block;
+                width: 100%;
+            }
+
+            .section h2 { 
+                color: #1a202c; 
+                border-bottom: 4px solid #3182ce; 
+                padding-bottom: 8px; 
+                font-size: 1.5rem; 
+                font-weight: 700; 
+            }
+
+            .skill-card h3 { 
+                color: #1a202c; 
+                font-size: 0.95rem; 
+                font-weight: 700; 
+            }
+
+            .skill-tag { 
+                background: #3182ce; 
+                color: white; 
+                padding: 3px 12px; 
+                border-radius: 16px; 
+                font-size: 0.7rem; 
+                font-weight: 600; 
+            }
+
+            .experience-item h3, .project-item h3 { 
+                color: #1a202c; 
+                font-size: 1rem; 
+                font-weight: 700; 
+                margin-bottom: 2px;
+            }
+            .experience-item .subtitle, .project-item .subtitle { 
+                color: #2d3748; 
+                font-weight: 700; 
+                font-size: 0.85rem; 
+            }
+            .experience-item .date, .project-item .date { 
+                color: #4a5568; 
+                font-size: 0.8rem; 
+                font-weight: 600; 
+            }
+
+            .tech-tag { 
+                background: #2b6cb0; 
+                color: white; 
+                padding: 2px 12px; 
+                border-radius: 16px; 
+                font-size: 0.7rem; 
+                font-weight: 600; 
+                border: 1px solid #1a4f7a; 
+            }
+
+            .feature-list li { 
+                padding: 3px 0; 
+                padding-left: 20px; 
+                color: #1a202c; 
+                font-size: 0.85rem; 
+            }
+            .feature-list li::before { 
+                content: "▸"; 
+                position: absolute; 
+                left: 0; 
+                color: #3182ce; 
+                font-weight: 700; 
+                font-size: 1rem; 
+            }
+
+            .github-badge { 
+                background: #1a202c; 
+                color: white; 
+                padding: 3px 14px; 
+                border-radius: 16px; 
+                font-size: 0.7rem; 
+                font-weight: 600; 
+                border: 1px solid #2d3748; 
+                display: inline-block;
+                margin-top: 8px;
+                align-self: flex-start;
+            }
+
+            .contact-links a { 
+                color: #3182ce; 
+                font-weight: 600; 
+                padding: 6px 16px; 
+                border-radius: 6px; 
+                background: #ebf8ff; 
+                border: 2px solid #3182ce; 
+                text-decoration: none; 
+                font-size: 0.85rem;
+            }
+
+            footer { 
+                color: #4a5568; 
+                font-weight: 500; 
+                font-size: 0.8rem; 
+            }
+
+            #apropos p { 
+                color: #1a202c; 
+                font-size: 0.95rem; 
+                line-height: 1.7; 
+                font-weight: 500; 
+            }
+
+            .grid-2 { 
+                display: grid; 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 15px; 
+            }
+            .grid-3 { 
+                display: grid; 
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 15px; 
+            }
+
+            .profile-image img { 
+                width: 110px; 
+                height: 110px; 
+                border-radius: 50%; 
+                object-fit: cover; 
+                border: 4px solid #3182ce; 
+            }
+
+            .skill-tags { 
+                display: flex; 
+                flex-wrap: wrap; 
+                gap: 4px; 
+            }
+            .tech-tags { 
+                display: flex; 
+                flex-wrap: wrap; 
+                gap: 4px; 
+                margin: 6px 0; 
+            }
+
+            .section {
+                padding: 16px 20px;
+                margin-bottom: 14px;
+            }
+            .section h2 {
+                margin-bottom: 14px;
+            }
+            .experience-item, .project-item {
+                padding: 12px 16px;
+                margin-bottom: 10px;
+            }
+            .skill-card {
+                padding: 12px 14px;
+            }
+
+            .container {
+                overflow: visible;
+            }
+            .project-item .project-description {
+                font-size: 0.8rem;
+                margin-top: 4px;
+                margin-bottom: 2px;
+            }
+            .contact-links {
+                gap: 12px;
+            }
+        }
+
+        /* ============================================================ */
+        /* STYLES ÉCRAN */
+        /* ============================================================ */
+        header {
+            background: linear-gradient(135deg, #2d3748, #1a202c);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        header h1 { font-size: 3rem; font-weight: 700; letter-spacing: 1px; }
+        header p { font-size: 1.3rem; color: #a0aec0; margin-top: 5px; }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+            scroll-margin-top: 20px;
+        }
+        .section:hover { transform: translateY(-2px); }
+        .section h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .skill-card {
+            background: #f7fafc;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid #3182ce;
+            transition: all 0.3s;
+        }
+        .skill-card:hover { background: #edf2f7; border-left-color: #2b6cb0; }
+        .skill-card h3 { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-tag { background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #2d3748; }
+
+        /* ============================================================ */
+        /* STYLES UNIFIÉS POUR EXPÉRIENCES ET PROJETS */
+        /* ============================================================ */
+        .experience-item, .project-item {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .experience-item:hover, .project-item:hover { 
+            border-color: #3182ce; 
+            box-shadow: 0 4px 12px rgba(49,130,206,0.15); 
+        }
+        .experience-item h3, .project-item h3 { 
+            color: #2d3748; 
+            font-size: 1.2rem; 
+            margin-bottom: 2px; 
+        }
+        .experience-item .subtitle, .project-item .subtitle { 
+            color: #4a5568; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+        }
+        .experience-item .date, .project-item .date { 
+            color: #718096; 
+            font-size: 0.85rem; 
+        }
+
+        /* Tags sous forme de liste (comme dans les expériences) */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 8px 0 10px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .tech-tag {
+            background: #3182ce;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* Liste des fonctionnalités */
+        .feature-list { 
+            list-style: none; 
+            padding-left: 0; 
+            margin: 4px 0 0 0;
+        }
+        .feature-list li { 
+            padding: 4px 0; 
+            padding-left: 20px; 
+            position: relative; 
+            font-size: 0.95rem;
+        }
+        .feature-list li::before { 
+            content: "▸"; 
+            position: absolute; 
+            left: 0; 
+            color: #3182ce; 
+        }
+
+        /* Style pour la description des projets */
+        .project-item .project-description {
+            margin: 4px 0 4px 0;
+            color: #1a202c;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .project-image {
+            margin: 0 0 6px 0;
+        }
+        .project-image-placeholder {
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .profile-image { display: flex; justify-content: center; margin-bottom: 20px; }
+        .profile-image img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #3182ce; box-shadow: 0 4px 15px rgba(49,130,206,0.3); }
+
+        .contact-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .contact-links a { color: #3182ce; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; background: #ebf8ff; transition: all 0.3s; }
+        .contact-links a:hover { background: #3182ce; color: white; }
+
+        footer { text-align: center; padding: 20px; color: #718096; font-size: 0.9rem; }
+
+        .github-badge { 
+            display: inline-block; 
+            background: #2d3748; 
+            color: white; 
+            padding: 4px 14px; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            margin-top: 8px;
+            align-self: flex-start;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .github-badge:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+
+        /* ============================================================ */
+        /* RESPONSIVE */
+        /* ============================================================ */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .burger-menu {
+                display: block;
+            }
+            .overlay.active {
+                display: block;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            header h1 { font-size: 2.2rem; }
+            .section { padding: 20px; }
+            .profile-image img { width: 120px; height: 120px; }
+            .main-content { padding: 10px; }
+            .container { padding: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- BURGER MENU (mobile) -->
+    <!-- ============================================================ -->
+    <button class="burger-menu" id="burgerMenu" aria-label="Menu">☰</button>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ============================================================ -->
+    <!-- SIDEBAR -->
+    <!-- ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="CV.png" alt="Photo de Fifaliana Valea" class="avatar">
+            <h2>Fifaliana Valea</h2>
+            <p>Développeuse Full-Stack</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#apropos" class="active"><span class="nav-icon">👤</span> À propos</a>
+            <a href="#competences"><span class="nav-icon">⚙️</span> Compétences</a>
+            <a href="#experiences"><span class="nav-icon">💼</span> Expériences</a>
+            <a href="#projets"><span class="nav-icon">📁</span> Projets</a>
+            <a href="#formation"><span class="nav-icon">🎓</span> Formation & Langues</a>
+            <a href="#contact"><span class="nav-icon">📬</span> Contact</a>
+        </nav>
+
+        <div class="sidebar-divider"></div>
+
+        <a href="CVPro1.pdf" download class="cv-download-btn">
+            📄 Télécharger mon CV
+        </a>
+
+        <div class="sidebar-footer">
+            © 2026 Fifaliana Valea
+        </div>
+    </aside>
+
+    <!-- ============================================================ -->
+    <!-- CONTENU PRINCIPAL -->
+    <!-- ============================================================ -->
+    <div class="main-content">
+        <div class="container">
+
+            <!-- ============================================================ -->
+            <!-- EN-TÊTE -->
+            <!-- ============================================================ -->
+            <header>
+                <div class="profile-image">
+                    <img src="CV.png" alt="Photo de Fifaliana Valea">
+                </div>
+                <h1>Fifaliana Valea</h1>
+                <p>Développeuse Full-Stack</p>
+            </header>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 1: À PROPOS -->
+            <!-- ============================================================ -->
+            <section class="section" id="apropos">
+                <h2>À propos</h2>
+                <p>Développeuse Full-Stack avec une solide formation en informatique (Licence Web & Design). J'évolue efficacement en environnement collaboratif grâce à une approche méthodique et orientée résultats. Curieuse et adaptable, je m'intègre rapidement à de nouveaux contextes et contribue activement à la qualité des projets. J'accorde une importance particulière au partage des connaissances et à l'amélioration continue.</p>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 2: COMPÉTENCES -->
+            <!-- ============================================================ -->
+            <section class="section" id="competences">
+                <h2>Compétences</h2>
+                <div class="grid-2">
+                    <div class="skill-card">
+                        <h3>Front-End & Mobile</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React Native</span>
+                            <span class="skill-tag">Angular</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">Bootstrap</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Back-End</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Java Spring Boot</span>
+                            <span class="skill-tag">PHP Laravel</span>
+                            <span class="skill-tag">Symfony</span>
+                            <span class="skill-tag">C# ASP.NET MVC</span>
+                            <span class="skill-tag">.NET Core</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Bases de données</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MariaDB</span>
+                            <span class="skill-tag">Oracle</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Outils & DevOps</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">Composer</span>
+                            <span class="skill-tag">Maven</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div class="skill-card">
+                        <h3>Architecture</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">API REST</span>
+                            <span class="skill-tag">JWT</span>
+                            <span class="skill-tag">MVC</span>
+                            <span class="skill-tag">POO</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 3: EXPÉRIENCES PROFESSIONNELLES -->
+            <!-- ============================================================ -->
+            <section class="section" id="experiences">
+                <h2>Expériences professionnelles</h2>
+
+                <div class="experience-item">
+                    <h3>UBIX-SOLAR – Gestion de workflows</h3>
+                    <div class="subtitle">Adrware Consulting</div>
+                    <div class="date">Sept. 2025 – Mars 2026</div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Symfony</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Création de workflows pour l'automatisation des processus métier.</li>
+                        <li>Historique des échanges : traçabilité des messages, documents et validations.</li>
+                        <li>Gestion collaborative des tâches avec attribution, suivi et commentaires en temps réel.</li>
+                        <li>Export illimité des données en PDF, Excel et autres formats.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>AIOLIA-EVENT – Gestion d'événements</h3>
+                    <div class="subtitle">Adrware Consulting</div>
+                    <div class="date">Oct. 2025 – Janv. 2026</div>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Symfony</span>
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Gestion complète des événements (CRUD, médias, catégorisation, détection de conflits).</li>
+                        <li>Système de billetterie dynamique avec quotas, QR code unique et alertes de stock.</li>
+                        <li>Gestion des promotions et codes promo avec suivi des modifications de prix.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 4: PROJETS -->
+            <!-- ============================================================ -->
+            <section class="section" id="projets">
+                <h2>Projets</h2>
+
+                <div class="grid-2">
+                    <!-- Projet 1 : Cryptomonaï -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">💰 Cryptomonaï</div>
+                        </div>
+                        <h3>Cryptomonaï – Plateforme de gestion de cryptomonnaies</h3>
+                        <div class="subtitle">IT University</div>
+                        <div class="date">Déc. 2024 – Fév. 2025</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Java Spring Boot</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li>Backend (Spring Boot) : API REST sécurisée avec JWT, gestion des transactions et de la logique métier.</li>
+                            <li>Frontend (Laravel) : Interface utilisateur responsive avec dashboard analytique et visualisation des données.</li>
+                            <li>Application mobile (React Native) : Suivi de portefeuille en temps réel et système de notifications push.</li>
+                            <li>Déploiement & Sécurité : Conteneurisation avec Docker et intégration de Firebase pour l'authentification utilisateur.</li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
+                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/utilisateur" target="_blank" class="github-badge">📁 GitHub - Utilisateur</a>
+                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/laravel-tier" target="_blank" class="github-badge">📁 GitHub - Laravel</a>
+                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/Crypta-mobile" target="_blank" class="github-badge">📁 GitHub - Mobile</a>
+                        </div>
+                    </div>
+
+                    <!-- Projet 2 : Synchronisation RH -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">🔄 Synchronisation RH</div>
+                        </div>
+                        <h3>Synchronisation RH entre ERPNext et application .NET</h3>
+                        <div class="subtitle">IT University</div>
+                        <div class="date">Juin 2025</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ERPNext</span>
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li>Développement d'une API sécurisée pour l'authentification via ERPNext.</li>
+                            <li>Import intelligent de fichiers CSV (employés, salaires) avec validation stricte.</li>
+                            <li>Réinitialisation des données avant import et génération de statistiques.</li>
+                            <li>Tableaux mensuels dynamiques, filtres et graphiques d'évolution.</li>
+                        </ul>
+                        <a href="https://github.com/fifaliana-valea/ERPNextNewApp" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/ERPNextNewApp</a>
+                    </div>
+
+                    <!-- Projet 3 : Projet Sprint -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">⚙️ Projet Sprint</div>
+                        </div>
+                        <h3>Projet Sprint – Framework Java personnalisé</h3>
+                        <div class="subtitle">Framework Java inspiré de Spring MVC</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring MVC</span>
+                            <span class="tech-tag">Annotations</span>
+                            <span class="tech-tag">POO</span>
+                        </div>
+                        <p class="project-description">Framework Java personnalisé inspiré de Spring MVC, conçu pour simplifier le développement d'applications web.</p>
+                        <ul class="feature-list">
+                            <li><strong>Sprint 1 :</strong> Test avec init-param pour récupérer le nom du package contrôleur.</li>
+                            <li><strong>Sprint 2 :</strong> Méthode GET avec annotation_get et URL associée.</li>
+                            <li><strong>Sprint 3 :</strong> Gestion des URLs non associées avec message d'erreur personnalisé.</li>
+                            <li><strong>Sprint 4 :</strong> Création de ModelView (du Sprint 1 au Sprint 14).</li>
+                        </ul>
+                        <a href="https://github.com/fifaliana-valea/Projet_Sprint" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/Projet_Sprint</a>
+                    </div>
+
+                    <!-- Projet 4 : Pharmacie -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">💊 Pharmacie</div>
+                        </div>
+                        <h3>Gestion de Pharmacie</h3>
+                        <div class="subtitle">Application web de gestion de stock et ventes</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <p class="project-description">Application web de gestion de stock et ventes avec recherche multicritère et CRUD.</p>
+                        <ul class="feature-list">
+                            <li>Recherche multicritère et CRUD complet.</li>
+                            <li>Gestion intégrée des stocks (achats/ventes).</li>
+                            <li>Rôle de chef de projet : coordination des tâches et livraison dans les délais.</li>
+                        </ul>
+                        <a href="https://github.com/fifaliana-valea/Phramacie" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/Phramacie</a>
+                    </div>
+
+                    <!-- Projet 9 : C# + Vue.js (à faire en cours) -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">🆕 Projet C# & Vue.js</div>
+                        </div>
+                        <h3>Plateforme de gestion de tâches collaboratives</h3>
+                        <div class="subtitle">C# / .NET Core + Vue.js + PostgreSQL</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">.NET Core</span>
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                        <p class="project-description">Application de gestion de tâches collaboratives avec authentification, tableaux Kanban, notifications en temps réel et rapports d'activité.</p>
+                        <ul class="feature-list">
+                            <li>API REST sécurisée avec authentification JWT et gestion des rôles.</li>
+                            <li>Interface réactive en Vue.js 3 avec Composition API et Pinia.</li>
+                            <li>Base de données PostgreSQL avec Entity Framework Core.</li>
+                            <li>Tableaux Kanban drag & drop et suivi des tâches en temps réel.</li>
+                        </ul>
+                        <span class="github-badge">📁 À venir</span>
+                    </div>
+
+                    <!-- Projet 10 : Java + Laravel + PostgreSQL (à faire en cours) -->
+                    <div class="project-item">
+                        <div class="project-image">
+                            <div class="project-image-placeholder">🆕 Projet Java & Laravel</div>
+                        </div>
+                        <h3>Plateforme de réservation en ligne</h3>
+                        <div class="subtitle">Java Spring Boot + Laravel + PostgreSQL</div>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Java Spring Boot</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <p class="project-description">Système de réservation en ligne multi-services avec paiement intégré, gestion des disponibilités et tableau de bord administrateur.</p>
+                        <ul class="feature-list">
+                            <li>Backend Spring Boot : API REST pour la gestion des réservations et paiements.</li>
+                            <li>Frontend Laravel : Interface d'administration et portail client.</li>
+                            <li>Base PostgreSQL : Modélisation avancée et requêtes optimisées.</li>
+                            <li>Conteneurisation Docker pour le déploiement.</li>
+                        </ul>
+                        <span class="github-badge">📁 À venir</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 5: FORMATION & LANGUES -->
+            <!-- ============================================================ -->
+            <section class="section" id="formation">
+                <h2>Formation & Langues</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: #2d3748; margin-bottom: 10px;">Éducation</h3>
+                        <p><strong>IT University</strong> – Licence en Informatique, option Web et Design <span style="color: #718096;">(2022 - 2025)</span></p>
+                        <p style="margin-top: 8px;"><strong>Lycée Moderne Ampefiloha</strong> – Baccalauréat Série S <span style="color: #718096;">(2019 - 2022)</span> <span style="background: #48bb78; color: white; padding: 2px 12px; border-radius: 20px; font-size: 0.75rem; margin-left: 8px;">Mention Assez Bien</span></p>
+                    </div>
+                    <div>
+                        <h3 style="color: #2d3748; margin-bottom: 10px;">Langues</h3>
+                        <p><strong>Français</strong> – Intermédiaire (B2)</p>
+                        <p><strong>Anglais</strong> – Débutant (A2)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SECTION 6: CONTACT -->
+            <!-- ============================================================ -->
+            <section class="section" id="contact">
+                <h2>Me retrouver</h2>
+                <div class="contact-links">
+                    <a href="mailto:valeafifaliana@gmail.com">📧 Email</a>
+                    <a href="https://linkedin.com/in/fifaliana-valea-razakarimalala-6033603" target="_blank">🔗 LinkedIn</a>
+                    <a href="https://github.com/fifaliana-valea" target="_blank">🐙 GitHub</a>
+                </div>
+                <p style="margin-top: 20px; color: #4a5568;">Je serais ravie d'échanger avec vous !</p>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- FOOTER -->
+            <!-- ============================================================ -->
+            <footer>
+                © 2026 Fifaliana Valea. Tous droits réservés.
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================================ -->
+    <script>
+        // Menu burger pour mobile
+        const burgerMenu = document.getElementById('burgerMenu');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        burgerMenu.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        // Navigation active au scroll
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Fermer le sidebar au clic sur un lien (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Smooth scroll pour tous les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
