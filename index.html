@@ -1,1091 +1,306 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fifaliana Valea - Portfolio</title>
-    <style>
-        /* Reset et styles généraux */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f4f8;
-            color: #1a202c;
-            line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* ============================================================ */
-        /* SIDEBAR */
-        /* ============================================================ */
-        .sidebar {
-            width: 260px;
-            background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
-            color: #e2e8f0;
-            padding: 30px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 4px 0 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar-header {
-            text-align: center;
-            padding: 0 20px 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 20px;
-        }
-
-        .sidebar-header .avatar {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #3182ce;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 15px rgba(49,130,206,0.4);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.15rem;
-            color: #ffffff;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .sidebar-header p {
-            font-size: 0.8rem;
-            color: #a0aec0;
-            margin-top: 2px;
-        }
-
-        .sidebar-nav {
-            padding: 0 15px;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #cbd5e0;
-            text-decoration: none;
-            padding: 12px 16px;
-            border-radius: 10px;
-            margin-bottom: 4px;
-            font-size: 0.92rem;
-            font-weight: 500;
-            transition: all 0.25s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-nav a:hover {
-            background: rgba(49,130,206,0.15);
-            color: #ffffff;
-            border-left-color: #3182ce;
-            transform: translateX(4px);
-        }
-
-        .sidebar-nav a.active {
-            background: rgba(49,130,206,0.25);
-            color: #ffffff;
-            border-left-color: #3182ce;
-        }
-
-        .sidebar-nav a .nav-icon {
-            font-size: 1.1rem;
-            width: 22px;
-            text-align: center;
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.08);
-            margin: 15px 20px;
-        }
-
-        .cv-download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 10px 20px 0;
-            padding: 13px 16px;
-            background: linear-gradient(135deg, #3182ce, #2b6cb0);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(49,130,206,0.35);
-        }
-
-        .cv-download-btn:hover {
-            background: linear-gradient(135deg, #2b6cb0, #1a4f7a);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(49,130,206,0.5);
-        }
-
-        .sidebar-footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 0.72rem;
-            color: #718096;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-
-        /* Menu burger pour mobile */
-        .burger-menu {
-            display: none;
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1100;
-            background: #1a202c;
-            color: white;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-
-        /* ============================================================ */
-        /* CONTENU PRINCIPAL */
-        /* ============================================================ */
-        .main-content {
-            margin-left: 260px;
-            flex: 1;
-            padding: 20px;
-            width: calc(100% - 260px);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 10px;
-        }
-
-        /* ============================================================ */
-        /* STYLES POUR L'IMPRESSION / PDF EN PAYSAGE */
-        /* ============================================================ */
-        @media print {
-            @page {
-                size: landscape;
-                margin: 12mm 10mm;
-            }
-
-            body {
-                background: #f0f4f8;
-                margin: 0;
-                padding: 5px;
-                font-size: 11pt;
-                display: block;
-            }
-
-            .sidebar, .burger-menu, .overlay, .cv-download-btn {
-                display: none !important;
-            }
-
-            .main-content {
-                margin-left: 0 !important;
-                width: 100% !important;
-                padding: 0 !important;
-            }
-
-            .container {
-                max-width: 100%;
-                margin: 0 auto;
-                padding: 10px;
-            }
-
-            #competences, #experiences, #projets { 
-                page-break-before: always; 
-                page-break-after: avoid; 
-            }
-            #apropos { page-break-before: avoid; }
-            
-            .section {
-                box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-                border: 2px solid #cbd5e0;
-                border-radius: 10px;
-                margin-bottom: 18px;
-                padding: 20px 25px;
-                background: white;
-                page-break-inside: avoid;
-            }
-
-            header {
-                border-radius: 10px;
-                padding: 30px 0 25px;
-                background: linear-gradient(135deg, #2d3748, #1a202c);
-                margin-bottom: 18px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-                page-break-after: avoid;
-                border: 2px solid #2d3748;
-            }
-            header h1 { 
-                color: #ffffff !important; 
-                font-size: 2.4rem; 
-                font-weight: 700; 
-            }
-            header p { 
-                color: #cbd5e0 !important; 
-                font-size: 1.1rem; 
-            }
-
-            .grid-2, .grid-3, .project-detail, .skill-card, .experience-item, .project-item { 
-                page-break-inside: avoid; 
-            }
-
-            .skill-card { 
-                border-left: 5px solid #3182ce; 
-                background: #f7fafc; 
-                padding: 14px 16px; 
-                border-radius: 8px; 
-            }
-
-            .experience-item, .project-item { 
-                background: #f7fafc; 
-                padding: 14px 18px; 
-                border-radius: 8px; 
-                border: 2px solid #e2e8f0; 
-                margin-bottom: 12px;
-                display: flex;
-                flex-direction: column;
-            }
-
-            .project-image-placeholder { 
-                background: linear-gradient(135deg, #3182ce, #2b6cb0); 
-                color: white; 
-                padding: 8px 12px; 
-                border-radius: 4px; 
-                text-align: center; 
-                font-weight: 600; 
-                font-size: 0.8rem; 
-                margin-bottom: 8px;
-                display: inline-block;
-                width: 100%;
-            }
-
-            .section h2 { 
-                color: #1a202c; 
-                border-bottom: 4px solid #3182ce; 
-                padding-bottom: 8px; 
-                font-size: 1.5rem; 
-                font-weight: 700; 
-            }
-
-            .skill-card h3 { 
-                color: #1a202c; 
-                font-size: 0.95rem; 
-                font-weight: 700; 
-            }
-
-            .skill-tag { 
-                background: #3182ce; 
-                color: white; 
-                padding: 3px 12px; 
-                border-radius: 16px; 
-                font-size: 0.7rem; 
-                font-weight: 600; 
-            }
-
-            .experience-item h3, .project-item h3 { 
-                color: #1a202c; 
-                font-size: 1rem; 
-                font-weight: 700; 
-                margin-bottom: 2px;
-            }
-            .experience-item .subtitle, .project-item .subtitle { 
-                color: #2d3748; 
-                font-weight: 700; 
-                font-size: 0.85rem; 
-            }
-            .experience-item .date, .project-item .date { 
-                color: #4a5568; 
-                font-size: 0.8rem; 
-                font-weight: 600; 
-            }
-
-            .tech-tag { 
-                background: #2b6cb0; 
-                color: white; 
-                padding: 2px 12px; 
-                border-radius: 16px; 
-                font-size: 0.7rem; 
-                font-weight: 600; 
-                border: 1px solid #1a4f7a; 
-            }
-
-            .feature-list li { 
-                padding: 3px 0; 
-                padding-left: 20px; 
-                color: #1a202c; 
-                font-size: 0.85rem; 
-            }
-            .feature-list li::before { 
-                content: "▸"; 
-                position: absolute; 
-                left: 0; 
-                color: #3182ce; 
-                font-weight: 700; 
-                font-size: 1rem; 
-            }
-
-            .github-badge { 
-                background: #1a202c; 
-                color: white; 
-                padding: 3px 14px; 
-                border-radius: 16px; 
-                font-size: 0.7rem; 
-                font-weight: 600; 
-                border: 1px solid #2d3748; 
-                display: inline-block;
-                margin-top: 8px;
-                align-self: flex-start;
-            }
-
-            .contact-links a { 
-                color: #3182ce; 
-                font-weight: 600; 
-                padding: 6px 16px; 
-                border-radius: 6px; 
-                background: #ebf8ff; 
-                border: 2px solid #3182ce; 
-                text-decoration: none; 
-                font-size: 0.85rem;
-            }
-
-            footer { 
-                color: #4a5568; 
-                font-weight: 500; 
-                font-size: 0.8rem; 
-            }
-
-            #apropos p { 
-                color: #1a202c; 
-                font-size: 0.95rem; 
-                line-height: 1.7; 
-                font-weight: 500; 
-            }
-
-            .grid-2 { 
-                display: grid; 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 15px; 
-            }
-            .grid-3 { 
-                display: grid; 
-                grid-template-columns: repeat(3, 1fr); 
-                gap: 15px; 
-            }
-
-            .profile-image img { 
-                width: 110px; 
-                height: 110px; 
-                border-radius: 50%; 
-                object-fit: cover; 
-                border: 4px solid #3182ce; 
-            }
-
-            .skill-tags { 
-                display: flex; 
-                flex-wrap: wrap; 
-                gap: 4px; 
-            }
-            .tech-tags { 
-                display: flex; 
-                flex-wrap: wrap; 
-                gap: 4px; 
-                margin: 6px 0; 
-            }
-
-            .section {
-                padding: 16px 20px;
-                margin-bottom: 14px;
-            }
-            .section h2 {
-                margin-bottom: 14px;
-            }
-            .experience-item, .project-item {
-                padding: 12px 16px;
-                margin-bottom: 10px;
-            }
-            .skill-card {
-                padding: 12px 14px;
-            }
-
-            .container {
-                overflow: visible;
-            }
-            .project-item .project-description {
-                font-size: 0.8rem;
-                margin-top: 4px;
-                margin-bottom: 2px;
-            }
-            .contact-links {
-                gap: 12px;
-            }
-        }
-
-        /* ============================================================ */
-        /* STYLES ÉCRAN */
-        /* ============================================================ */
-        header {
-            background: linear-gradient(135deg, #2d3748, #1a202c);
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        header h1 { font-size: 3rem; font-weight: 700; letter-spacing: 1px; }
-        header p { font-size: 1.3rem; color: #a0aec0; margin-top: 5px; }
-
-        .section {
-            background: white;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
-            scroll-margin-top: 20px;
-        }
-        .section:hover { transform: translateY(-2px); }
-        .section h2 {
-            font-size: 1.8rem;
-            color: #2d3748;
-            border-bottom: 3px solid #3182ce;
-            padding-bottom: 12px;
-            margin-bottom: 25px;
-        }
-
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
-        .skill-card {
-            background: #f7fafc;
-            padding: 18px;
-            border-radius: 10px;
-            border-left: 4px solid #3182ce;
-            transition: all 0.3s;
-        }
-        .skill-card:hover { background: #edf2f7; border-left-color: #2b6cb0; }
-        .skill-card h3 { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .skill-tag { background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: #2d3748; }
-
-        /* ============================================================ */
-        /* STYLES UNIFIÉS POUR EXPÉRIENCES ET PROJETS */
-        /* ============================================================ */
-        .experience-item, .project-item {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 18px;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .experience-item:hover, .project-item:hover { 
-            border-color: #3182ce; 
-            box-shadow: 0 4px 12px rgba(49,130,206,0.15); 
-        }
-        .experience-item h3, .project-item h3 { 
-            color: #2d3748; 
-            font-size: 1.2rem; 
-            margin-bottom: 2px; 
-        }
-        .experience-item .subtitle, .project-item .subtitle { 
-            color: #4a5568; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-        }
-        .experience-item .date, .project-item .date { 
-            color: #718096; 
-            font-size: 0.85rem; 
-        }
-
-        /* Tags sous forme de liste (comme dans les expériences) */
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin: 8px 0 10px 0;
-            padding: 0;
-            list-style: none;
-        }
-        .tech-tag {
-            background: #3182ce;
-            color: white;
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        /* Liste des fonctionnalités */
-        .feature-list { 
-            list-style: none; 
-            padding-left: 0; 
-            margin: 4px 0 0 0;
-        }
-        .feature-list li { 
-            padding: 4px 0; 
-            padding-left: 20px; 
-            position: relative; 
-            font-size: 0.95rem;
-        }
-        .feature-list li::before { 
-            content: "▸"; 
-            position: absolute; 
-            left: 0; 
-            color: #3182ce; 
-        }
-
-        /* Style pour la description des projets */
-        .project-item .project-description {
-            margin: 4px 0 4px 0;
-            color: #1a202c;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .project-image {
-            margin: 0 0 6px 0;
-        }
-        .project-image-placeholder {
-            background: linear-gradient(135deg, #3182ce, #2b6cb0);
-            color: white;
-            padding: 8px 14px;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .profile-image { display: flex; justify-content: center; margin-bottom: 20px; }
-        .profile-image img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #3182ce; box-shadow: 0 4px 15px rgba(49,130,206,0.3); }
-
-        .contact-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        .contact-links a { color: #3182ce; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; background: #ebf8ff; transition: all 0.3s; }
-        .contact-links a:hover { background: #3182ce; color: white; }
-
-        footer { text-align: center; padding: 20px; color: #718096; font-size: 0.9rem; }
-
-        .github-badge { 
-            display: inline-block; 
-            background: #2d3748; 
-            color: white; 
-            padding: 4px 14px; 
-            border-radius: 20px; 
-            font-size: 0.75rem; 
-            margin-top: 8px;
-            align-self: flex-start;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        .github-badge:hover {
-            background: #3182ce;
-            transform: translateY(-1px);
-        }
-
-        /* ============================================================ */
-        /* RESPONSIVE */
-        /* ============================================================ */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            .burger-menu {
-                display: block;
-            }
-            .overlay.active {
-                display: block;
-            }
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            header h1 { font-size: 2.2rem; }
-            .section { padding: 20px; }
-            .profile-image img { width: 120px; height: 120px; }
-            .main-content { padding: 10px; }
-            .container { padding: 5px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Fifaliana Valea, développeuse Full-Stack junior basée à Antananarivo, Madagascar." />
+  <meta name="author" content="Fifaliana Valea" />
+  <meta name="theme-color" content="#0b0b12" />
+  <meta property="og:title" content="Fifaliana Valea — Développeuse Full-Stack" />
+  <meta property="og:description" content="Portfolio professionnel : compétences, expériences chez Adrware Consulting, projets et contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fifalianavalea.vercel.app/" />
+  <title>Fifaliana Valea — Développeuse Full-Stack | Portfolio</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <script>
+    (function () {
+      document.documentElement.classList.add("js");
+      try {
+        var saved = localStorage.getItem("portfolio-theme");
+        var theme = saved === "light" || saved === "dark"
+          ? saved
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+        var lang = localStorage.getItem("portfolio-lang");
+        if (lang === "fr" || lang === "en") document.documentElement.lang = lang;
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
 
-    <!-- ============================================================ -->
-    <!-- BURGER MENU (mobile) -->
-    <!-- ============================================================ -->
-    <button class="burger-menu" id="burgerMenu" aria-label="Menu">☰</button>
-    <div class="overlay" id="overlay"></div>
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar"></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- SIDEBAR -->
-    <!-- ============================================================ -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <img src="CV.png" alt="Photo de Fifaliana Valea" class="avatar">
-            <h2>Fifaliana Valea</h2>
-            <p>Développeuse Full-Stack</p>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#accueil">
+        <span class="brand__mark">FV</span>
+        <span>Fifaliana Valea</span>
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <div class="nav__backdrop" aria-hidden="true"></div>
+        <ul class="nav__list" id="primary-nav">
+          <li><a class="nav__link is-active" href="#accueil" data-i18n="nav.home">Accueil</a></li>
+          <li><a class="nav__link" href="#apropos" data-i18n="nav.about">À propos</a></li>
+          <li><a class="nav__link" href="#competences" data-i18n="nav.skills">Compétences</a></li>
+          <li><a class="nav__link" href="#experiences" data-i18n="nav.experience">Expériences</a></li>
+          <li><a class="nav__link" href="#projets" data-i18n="nav.projects">Projets</a></li>
+          <li><a class="nav__link" href="#formation" data-i18n="nav.education">Formation</a></li>
+          <li><a class="nav__link" href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+
+        <div class="nav__controls">
+          <button type="button" class="lang-toggle" data-lang-toggle aria-label="Passer en anglais">EN</button>
+          <button type="button" class="icon-btn" data-theme-toggle aria-pressed="true" aria-label="Passer en mode clair">
+            <span data-icon="sun" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+            <span data-icon="moon" hidden aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 7 7 0 0 0 20 14.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <button type="button" class="icon-btn menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Ouvrir le menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
         </div>
-
-        <nav class="sidebar-nav">
-            <a href="#apropos" class="active"><span class="nav-icon">👤</span> À propos</a>
-            <a href="#competences"><span class="nav-icon">⚙️</span> Compétences</a>
-            <a href="#experiences"><span class="nav-icon">💼</span> Expériences</a>
-            <a href="#projets"><span class="nav-icon">📁</span> Projets</a>
-            <a href="#formation"><span class="nav-icon">🎓</span> Formation & Langues</a>
-            <a href="#contact"><span class="nav-icon">📬</span> Contact</a>
-        </nav>
-
-        <div class="sidebar-divider"></div>
-
-        <a href="razakarimalala Fifaliana valea.pdf" download="razakarimalala Fifaliana valea.pdf" class="cv-download-btn">
-            📄 Télécharger mon CV
-        </a>
-
-        <div class="sidebar-footer">
-            © 2026 Fifaliana Valea
-        </div>
-    </aside>
-
-    <!-- ============================================================ -->
-    <!-- CONTENU PRINCIPAL -->
-    <!-- ============================================================ -->
-    <div class="main-content">
-        <div class="container">
-
-            <!-- ============================================================ -->
-            <!-- EN-TÊTE -->
-            <!-- ============================================================ -->
-            <header>
-                <div class="profile-image">
-                    <img src="CV.png" alt="Photo de Fifaliana Valea">
-                </div>
-                <h1>Fifaliana Valea</h1>
-                <p>Développeuse Full-Stack</p>
-            </header>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 1: À PROPOS -->
-            <!-- ============================================================ -->
-            <section class="section" id="apropos">
-                <h2>À propos</h2>
-                <p>Développeuse Full-Stack avec une expérience dans le <strong>développement, la maintenance et l'évolution d'applications web et métier</strong>. J'ai participé à des projets existants et complexes en intervenant sur la <strong>correction de bugs, l'amélioration de fonctionnalités et le développement de nouvelles fonctionnalités</strong>, tout en respectant l'architecture, les règles métier et les systèmes d'autorisations existants.</p>
-                <p style="margin-top: 12px;">Je possède également une expérience en <strong>API REST, intégration de systèmes, traitement de données et automatisation de workflows</strong>, avec une pratique de Make et n8n. J'ai notamment travaillé sur un projet de synchronisation entre <strong>ERPNext et une application ASP.NET Core/C#</strong>.</p>
-                <p style="margin-top: 12px;">Curieuse, méthodique et adaptable, je suis à l'aise pour intervenir aussi bien sur le <strong>développement Full-Stack</strong> que sur des projets d'<strong>intégration, d'outils métier et d'automatisation</strong>.</p>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 2: COMPÉTENCES -->
-            <!-- ============================================================ -->
-            <section class="section" id="competences">
-                <h2>Compétences</h2>
-                <div class="grid-2">
-                    <div class="skill-card">
-                        <h3>Front-End & Mobile</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">React Native</span>
-                            <span class="skill-tag">Angular</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Vue.js</span>
-                            <span class="skill-tag">TypeScript</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">Bootstrap</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Back-End</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">PHP</span>
-                            <span class="skill-tag">Symfony</span>
-                            <span class="skill-tag">Laravel</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">Spring Boot</span>
-                            <span class="skill-tag">C#</span>
-                            <span class="skill-tag">ASP.NET Core</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Bases de données</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">PostgreSQL</span>
-                            <span class="skill-tag">MySQL</span>
-                            <span class="skill-tag">MariaDB</span>
-                            <span class="skill-tag">SQL Server</span>
-                            <span class="skill-tag">Oracle</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Firebase</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>Outils & DevOps</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">GitHub</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">Postman</span>
-                            <span class="skill-tag">Composer</span>
-                            <span class="skill-tag">Maven</span>
-                            <span class="skill-tag">Trello</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: 15px;">
-                    <div class="skill-card">
-                        <h3>Architecture, Intégration & Automatisation</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">API REST</span>
-                            <span class="skill-tag">JSON</span>
-                            <span class="skill-tag">JWT</span>
-                            <span class="skill-tag">MVC</span>
-                            <span class="skill-tag">POO</span>
-                            <span class="skill-tag">Authentification API</span>
-                            <span class="skill-tag">Intégration de systèmes</span>
-                            <span class="skill-tag">Automatisation de workflows</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: 15px;">
-                    <div class="skill-card">
-                        <h3>Langages de programmation</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">C#</span>
-                            <span class="skill-tag">PHP</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">TypeScript</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">SQL</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 3: EXPÉRIENCES PROFESSIONNELLES -->
-            <!-- ============================================================ -->
-            <section class="section" id="experiences">
-                <h2>Expériences professionnelles</h2>
-
-                <!-- UBIX-SOLAR -->
-                <div class="experience-item">
-                    <h3>UBIX-SOLAR — Développeuse Web</h3>
-                    <div class="subtitle">Adrware Consulting</div>
-                    <div class="date">Septembre 2025 – Mars 2026</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Angular</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">Symfony</span>
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">REST API</span>
-                    </div>
-                    <p style="margin: 4px 0; font-size: 0.9rem; color: #4a5568;">
-                        Application web métier destinée aux professionnels des installations photovoltaïques, existante et en constante évolution, à laquelle j’ai contribué au sein de l’équipe de développement.
-                    </p>                    
-                    <ul class="feature-list">
-                        <li>Participation à l'évolution et à la maintenance d'une application métier existante.</li>
-                        <li>Analyse et <strong>correction de bugs</strong> afin d'améliorer la stabilité et la fiabilité de l'application.</li>
-                        <li>Développement et intégration de <strong>nouvelles fonctionnalités</strong> selon les besoins du projet.</li>
-                        <li>Amélioration et adaptation de fonctionnalités existantes.</li>
-                        <li>Respect des <strong>rôles, permissions et autorisations</strong> déjà définis dans l'application.</li>
-                        <li>Intervention sur différents workflows et processus métier existants.</li>
-                        <li>Gestion et suivi des échanges, documents et validations.</li>
-                        <li>Gestion collaborative des tâches : attribution, suivi et commentaires.</li>
-                        <li>Développement de fonctionnalités d'export des données et rapports en PDF, Excel et autres formats.</li>
-                        <li>Utilisation d'<strong>API REST</strong> pour les échanges entre les différentes parties de l'application.</li>
-                        <li>Travail sur un projet existant nécessitant la compréhension d'une architecture et de règles métier déjà établies.</li>
-                    </ul>
-                </div>
-
-                <!-- AIOLIA-EVENT -->
-                <div class="experience-item">
-                    <h3>AIOLIA-EVENT — Développeuse Full-Stack</h3>
-                    <div class="subtitle">Adrware Consulting</div>
-                    <div class="date">Octobre 2025 – Janvier 2026</div>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Symfony</span>
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">REST API</span>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Développement d'une application de gestion d'événements.</li>
-                        <li>Gestion complète des événements : CRUD, médias, catégorisation, duplication et détection de conflits.</li>
-                        <li>Développement d'un système de billetterie dynamique.</li>
-                        <li>Gestion des quotas, QR codes uniques, ventes en temps réel et alertes de stock.</li>
-                        <li>Gestion des promotions et codes promotionnels.</li>
-                        <li>Suivi des modifications de prix.</li>
-                        <li>Développement et utilisation d'<strong>API REST</strong>.</li>
-                        <li>Travail avec <strong>PostgreSQL</strong> et architecture backend Symfony.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 4: PROJETS -->
-            <!-- ============================================================ -->
-            <section class="section" id="projets">
-                <h2>Projets</h2>
-
-                <div class="grid-2">
-                    <!-- Projet 1 : Synchronisation RH -->
-                    <div class="project-item">
-                        <div class="project-image">
-                            <div class="project-image-placeholder">🔄 Synchronisation RH</div>
-                        </div>
-                        <h3>Synchronisation RH entre ERPNext et application .NET</h3>
-                        <div class="subtitle">ERPNext · ASP.NET Core · C# · REST API · SQL</div>
-                        <div class="date">Juin 2025</div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">ERPNext</span>
-                            <span class="tech-tag">ASP.NET Core</span>
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">SQL</span>
-                        </div>
-                        <p class="project-description">Projet basé sur un ERP existant avec développement d'une application .NET permettant l'échange et la synchronisation de données RH.</p>
-                        <ul class="feature-list">
-                            <li>Développement d'une <strong>API sécurisée</strong> pour l'authentification via les comptes ERPNext.</li>
-                            <li>Communication avec les services d'un <strong>ERP existant</strong>.</li>
-                            <li>Importation de fichiers CSV contenant les données des employés, salaires et fiches de paie.</li>
-                            <li>Validation des données et des formats, notamment les dates.</li>
-                            <li>Réinitialisation et mise à jour des données existantes avant import.</li>
-                            <li>Gestion des données liées aux employés, salaires et fiches de paie.</li>
-                            <li>Génération et mise à jour des données.</li>
-                            <li>Création de statistiques et tableaux de suivi.</li>
-                            <li>Utilisation de <strong>C#, ASP.NET Core, REST API et SQL</strong>.</li>
-                        </ul>
-                        <a href="https://github.com/fifaliana-valea/ERPNextNewApp" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/ERPNextNewApp</a>
-                    </div>
-
-
-                    <!-- Projet 3 : Cryptomonaï -->
-                    <div class="project-item">
-                        <div class="project-image">
-                            <div class="project-image-placeholder">💰 Cryptomonaï</div>
-                        </div>
-                        <h3>Cryptomonaï – Plateforme de gestion de cryptomonnaies</h3>
-                        <div class="subtitle">IT University</div>
-                        <div class="date">Déc. 2024 – Fév. 2025</div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">Java Spring Boot</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Firebase</span>
-                        </div>
-                        <ul class="feature-list">
-                            <li>Backend (Spring Boot) : API REST sécurisée avec JWT, gestion des transactions et de la logique métier.</li>
-                            <li>Frontend (Laravel) : Interface utilisateur responsive avec dashboard analytique et visualisation des données.</li>
-                            <li>Application mobile (React Native) : Suivi de portefeuille en temps réel et système de notifications push.</li>
-                            <li>Déploiement & Sécurité : Conteneurisation avec Docker et intégration de Firebase pour l'authentification utilisateur.</li>
-                        </ul>
-                        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
-                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/utilisateur" target="_blank" class="github-badge">📁 GitHub - Utilisateur</a>
-                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/laravel-tier" target="_blank" class="github-badge">📁 GitHub - Laravel</a>
-                            <a href="https://github.com/TsitoNyAvoSoaRazaFindrakoto/Crypta-mobile" target="_blank" class="github-badge">📁 GitHub - Mobile</a>
-                        </div>
-                    </div>
-
-                    <!-- Projet 4 : Projet Sprint -->
-                    <div class="project-item">
-                        <div class="project-image">
-                            <div class="project-image-placeholder">⚙️ Projet Sprint</div>
-                        </div>
-                        <h3>Projet Sprint – Framework Java personnalisé</h3>
-                        <div class="subtitle">Framework Java inspiré de Spring MVC</div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Spring MVC</span>
-                            <span class="tech-tag">Annotations</span>
-                            <span class="tech-tag">POO</span>
-                        </div>
-                        <p class="project-description">Framework Java personnalisé inspiré de Spring MVC, conçu pour simplifier le développement d'applications web.</p>
-                        <ul class="feature-list">
-                            <li><strong>Sprint 1 :</strong> Test avec init-param pour récupérer le nom du package contrôleur.</li>
-                            <li><strong>Sprint 2 :</strong> Méthode GET avec annotation_get et URL associée.</li>
-                            <li><strong>Sprint 3 :</strong> Gestion des URLs non associées avec message d'erreur personnalisé.</li>
-                            <li><strong>Sprint 4 :</strong> Création de ModelView (du Sprint 1 au Sprint 14).</li>
-                        </ul>
-                        <a href="https://github.com/fifaliana-valea/Projet_Sprint" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/Projet_Sprint</a>
-                    </div>
-
-                    <!-- Projet 5 : Pharmacie -->
-                    <div class="project-item">
-                        <div class="project-image">
-                            <div class="project-image-placeholder">💊 Pharmacie</div>
-                        </div>
-                        <h3>Gestion de Pharmacie</h3>
-                        <div class="subtitle">Application web de gestion de stock et ventes</div>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                        </div>
-                        <p class="project-description">Application web de gestion de stock et ventes avec recherche multicritère et CRUD.</p>
-                        <ul class="feature-list">
-                            <li>Recherche multicritère et CRUD complet.</li>
-                            <li>Gestion intégrée des stocks (achats/ventes).</li>
-                            <li>Rôle de chef de projet : coordination des tâches et livraison dans les délais.</li>
-                        </ul>
-                        <a href="https://github.com/fifaliana-valea/Phramacie" target="_blank" class="github-badge">📁 GitHub : fifaliana-valea/Phramacie</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 5: FORMATION & LANGUES -->
-            <!-- ============================================================ -->
-            <section class="section" id="formation">
-                <h2>Formation & Langues</h2>
-                <div class="grid-2">
-                    <div>
-                        <h3 style="color: #2d3748; margin-bottom: 10px;">Éducation</h3>
-                        <p><strong>IT University</strong> – Licence en Informatique, option Web et Design <span style="color: #718096;">(2022 - 2025)</span> <span style="background: #48bb78; color: white; padding: 2px 12px; border-radius: 20px; font-size: 0.75rem; margin-left: 8px;">Diplôme obtenu</span></p>
-                        <p style="margin-top: 8px;"><strong>Lycée Moderne Ampefiloha</strong> – Baccalauréat Série S <span style="color: #718096;">(2019 - 2022)</span> <span style="background: #48bb78; color: white; padding: 2px 12px; border-radius: 20px; font-size: 0.75rem; margin-left: 8px;">Mention Assez Bien</span></p>
-                    </div>
-                    <div>
-                        <h3 style="color: #2d3748; margin-bottom: 10px;">Langues</h3>
-                        <p><strong>Français</strong> – Opérationnel (B2)</p>
-                        <p><strong>Anglais</strong> – Intermédiaire (B1)</p>
-                        <p><strong>Malagasy</strong> – Langue maternelle</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- SECTION 6: CONTACT -->
-            <!-- ============================================================ -->
-            <section class="section" id="contact">
-                <h2>Me retrouver</h2>
-                <div class="contact-links">
-                    <a href="mailto:valeafifaliana@gmail.com">📧 Email</a>
-                    <a href="https://linkedin.com/in/fifaliana-valea-razakarimalala-603360350/" target="_blank">🔗 LinkedIn</a>
-                    <a href="https://github.com/fifaliana-valea" target="_blank">🐙 GitHub</a>
-                </div>
-                <p style="margin-top: 20px; color: #4a5568;">Je serais ravie d'échanger avec vous !</p>
-            </section>
-
-            <!-- ============================================================ -->
-            <!-- FOOTER -->
-            <!-- ============================================================ -->
-            <footer>
-                © 2026 Fifaliana Valea. Tous droits réservés.
-            </footer>
-
-        </div>
+      </nav>
     </div>
+  </header>
 
-    <!-- ============================================================ -->
-    <!-- SCRIPTS -->
-    <!-- ============================================================ -->
-    <script>
-        // Menu burger pour mobile
-        const burgerMenu = document.getElementById('burgerMenu');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
+  <main id="main">
+    <!-- Accueil -->
+    <section id="accueil" class="hero hero-animate" aria-labelledby="hero-name">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__grid"></div>
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+      </div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="hero__greeting" data-i18n="hero.greeting">Bonjour, je suis</p>
+          <h1 id="hero-name" class="hero__name">Fifaliana Valea</h1>
+          <p class="hero__title" data-i18n="hero.title">Développeuse Full-Stack</p>
+          <p class="hero__tagline" data-i18n="hero.tagline">
+            Développeuse Full-Stack passionnée par la conception d'applications web et l'intégration de solutions techniques.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#projets" data-i18n="hero.ctaProjects">Découvrir mes projets</a>
+            <a class="btn btn--ghost" href="#contact" data-i18n="hero.ctaContact">Me contacter</a>
+            <a class="btn btn--ghost" href="files/CV_Fifaliana_Valea.pdf" download="CV_Fifaliana_Valea.pdf" data-cv-download data-i18n="hero.ctaCv">Télécharger mon CV</a>
+          </div>
+          <div class="hero__socials">
+            <a href="https://github.com/fifaliana-valea" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.21 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.48A10.03 10.03 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/fifaliana-valea-razakarimalala-603360350/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.94 6.5A1.94 1.94 0 1 1 5 4.56 1.94 1.94 0 0 1 6.94 6.5zM5.25 8.75h3.38V20H5.25zm5.63 0h3.24v1.54h.05a3.55 3.55 0 0 1 3.2-1.76c3.42 0 4.05 2.25 4.05 5.18V20h-3.38v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V20h-3.5z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
 
-        burgerMenu.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
+        <div class="hero__visual">
+          <figure class="hero__frame">
+            <img
+              class="hero__portrait"
+              src="assets/images/portrait-fifaliana-valea.png"
+              alt="Portrait de Fifaliana Valea"
+              width="600"
+              height="600"
+              fetchpriority="high"
+            />
+          </figure>
+          <div class="hero__badge" aria-hidden="true">
+            <strong>Antananarivo</strong>
+            Madagascar
+          </div>
+        </div>
+      </div>
+    </section>
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-        });
+    <!-- À propos -->
+    <section id="apropos" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">01</p>
+          <h2 id="about-title" data-i18n="about.title">À propos</h2>
+        </header>
+        <div class="about-grid">
+          <div class="card about-panel about-panel--accent reveal">
+            <p data-i18n="about.lead"></p>
+            <p data-i18n="about.body"></p>
+            <div class="quality-block">
+              <h3 data-i18n="about.qualitiesTitle">Approche professionnelle</h3>
+              <p data-i18n="about.qualities"></p>
+            </div>
+          </div>
+          <aside class="card about-panel reveal" aria-labelledby="languages-title">
+            <h3 id="languages-title" data-i18n="about.languagesTitle">Langues</h3>
+            <ul class="lang-list" data-languages></ul>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-        // Navigation active au scroll
-        const sections = document.querySelectorAll('.section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
+    <!-- Compétences -->
+    <section id="competences" class="section" aria-labelledby="skills-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">02</p>
+          <h2 id="skills-title" data-i18n="skills.title">Compétences</h2>
+          <p class="section__subtitle" data-i18n="skills.subtitle"></p>
+        </header>
+        <div class="skills-grid reveal-stagger" data-skills></div>
+      </div>
+    </section>
 
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
+    <!-- Expériences -->
+    <section id="experiences" class="section" aria-labelledby="experience-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">03</p>
+          <h2 id="experience-title" data-i18n="experience.title">Expériences professionnelles</h2>
+          <p class="section__subtitle" data-i18n="experience.subtitle"></p>
+        </header>
+        <div class="timeline" data-experience></div>
+      </div>
+    </section>
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
+    <!-- Projets -->
+    <section id="projets" class="section" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">04</p>
+          <h2 id="projects-title" data-i18n="projects.title">Projets</h2>
+          <p class="section__subtitle" data-i18n="projects.subtitle"></p>
+        </header>
+        <div class="projects-grid reveal-stagger" data-projects></div>
+      </div>
+    </section>
 
-        // Fermer le sidebar au clic sur un lien (mobile)
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                }
-            });
-        });
+    <!-- Formation -->
+    <section id="formation" class="section" aria-labelledby="education-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">05</p>
+          <h2 id="education-title" data-i18n="education.title">Formation</h2>
+          <p class="section__subtitle" data-i18n="education.subtitle"></p>
+        </header>
+        <div class="edu-grid reveal-stagger" data-education></div>
+      </div>
+    </section>
 
-        // Smooth scroll pour tous les liens d'ancrage
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+    <!-- Contact -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section__header reveal">
+          <p class="section__eyebrow">06</p>
+          <h2 id="contact-title" data-i18n="contact.title">Contact</h2>
+          <p class="section__subtitle" data-i18n="contact.subtitle"></p>
+        </header>
 
+        <div class="contact-layout">
+          <div class="contact-info reveal">
+            <a class="contact-info__item" href="mailto:valeafifaliana@gmail.com">
+              <span class="contact-info__label" data-i18n="contact.emailLabel">E-mail</span>
+              <span class="contact-info__value" data-contact-email>valeafifaliana@gmail.com</span>
+            </a>
+            <a class="contact-info__item" href="tel:+261342023543">
+              <span class="contact-info__label" data-i18n="contact.phoneLabel">Téléphone</span>
+              <span class="contact-info__value" data-contact-phone>+261 34 20 235 43</span>
+            </a>
+            <div class="contact-info__item">
+              <span class="contact-info__label" data-i18n="contact.locationLabel">Localisation</span>
+              <span class="contact-info__value" data-contact-location>Antananarivo, Madagascar</span>
+            </div>
+            <a class="contact-info__item" href="https://github.com/fifaliana-valea" target="_blank" rel="noopener noreferrer">
+              <span class="contact-info__label">GitHub</span>
+              <span class="contact-info__value">fifaliana-valea</span>
+            </a>
+            <a class="contact-info__item" href="https://www.linkedin.com/in/fifaliana-valea-razakarimalala-603360350/" target="_blank" rel="noopener noreferrer">
+              <span class="contact-info__label">LinkedIn</span>
+              <span class="contact-info__value">Fifaliana Valea Razakarimalala</span>
+            </a>
+          </div>
+
+          <form class="card contact-form reveal" data-contact-form novalidate>
+            <h3 data-i18n="contact.formTitle">Envoyer un message</h3>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="contact-name" data-i18n-label="contact.name">Nom</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" required data-i18n-placeholder="contact.name" />
+                <span class="form-field__error" data-error="name" role="alert"></span>
+              </div>
+              <div class="form-field">
+                <label for="contact-email" data-i18n-label="contact.email">Adresse e-mail</label>
+                <input id="contact-email" name="email" type="email" autocomplete="email" required data-i18n-placeholder="contact.email" />
+                <span class="form-field__error" data-error="email" role="alert"></span>
+              </div>
+              <div class="form-field">
+                <label for="contact-subject" data-i18n-label="contact.subject">Sujet</label>
+                <input id="contact-subject" name="subject" type="text" required data-i18n-placeholder="contact.subject" />
+                <span class="form-field__error" data-error="subject" role="alert"></span>
+              </div>
+              <div class="form-field">
+                <label for="contact-message" data-i18n-label="contact.message">Message</label>
+                <textarea id="contact-message" name="message" required data-i18n-placeholder="contact.message"></textarea>
+                <span class="form-field__error" data-error="message" role="alert"></span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn--primary" type="submit" data-i18n="contact.send">Envoyer</button>
+              <a class="btn btn--ghost" href="mailto:valeafifaliana@gmail.com" data-i18n="contact.mailtoFallback">Écrire un e-mail</a>
+            </div>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+            <p class="form-note" data-i18n="contact.formNote"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <p class="site-footer__meta" data-i18n="footer.rights"></p>
+        <p class="site-footer__meta" data-i18n="footer.built"></p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="https://github.com/fifaliana-valea" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/fifaliana-valea-razakarimalala-603360350/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:valeafifaliana@gmail.com">E-mail</a></li>
+        <li><a href="files/CV_Fifaliana_Valea.pdf" download="CV_Fifaliana_Valea.pdf" data-cv-download>CV</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" data-back-to-top aria-label="Retour en haut">
+    <span class="visually-hidden" data-i18n="backToTop">Retour en haut</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="data/content.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/cv-download.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
