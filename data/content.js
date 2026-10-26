@@ -121,7 +121,7 @@ window.PORTFOLIO_CONTENT = {
             description:
               "Application web métier destinée aux professionnels des installations photovoltaïques, existante et en constante évolution, à laquelle j'ai contribué au sein de l'équipe de développement.",
             missions: [
-              "Participation à l'évolution et à la maintenance d'une application métier existante.",
+              "Participation à la gestion et à l'amélioration des workflows métier existants afin de faciliter le suivi des tâches, des documents et des validations.",
               "Analyse et correction de bugs afin d'améliorer la stabilité et la fiabilité de l'application.",
               "Développement et intégration de nouvelles fonctionnalités selon les besoins du projet.",
               "Amélioration et adaptation de fonctionnalités existantes.",
