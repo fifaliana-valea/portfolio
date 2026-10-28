@@ -7,7 +7,7 @@ window.PORTFOLIO_CONTENT = {
   meta: {
     name: "Fifaliana Valea",
     fullName: "Razakarimalala Fifaliana Valea",
-    title: { fr: "Développeuse Full-Stack", en: "Full-Stack Developer" },
+    title: { fr: "Développeuse Full-Stack Web Junior", en: "Junior Full-Stack Web Developer" },
     location: { fr: "Antananarivo, Madagascar", en: "Antananarivo, Madagascar" },
     email: "valeafifaliana@gmail.com",
     phone: "+261 34 20 235 43",
@@ -39,8 +39,9 @@ window.PORTFOLIO_CONTENT = {
       },
       hero: {
         greeting: "Bonjour, je suis",
+        title: "Développeuse Full-Stack Web Junior",
         tagline:
-          "Développeuse Full-Stack passionnée par la conception d'applications web et l'intégration de solutions techniques. J'aime comprendre les besoins métier, résoudre les problèmes et contribuer à l'évolution de projets concrets au sein d'une équipe.",
+          "Jeune développeuse full-stack, récemment diplômée d'une Licence en Informatique (IT University, 2025). De septembre 2025 à mars 2026, j'ai contribué à des applications web métier chez Adrware Consulting — Symfony, Angular, TypeScript, API REST, exports PDF/Excel et billetterie dynamique. Curieuse, rigoureuse et orientée équipe, je recherche aujourd'hui un premier poste en CDI pour continuer à apprendre et livrer des solutions concrètes.",
         ctaProjects: "Découvrir mes projets",
         ctaContact: "Me contacter",
         ctaCv: "Télécharger mon CV",
@@ -50,14 +51,15 @@ window.PORTFOLIO_CONTENT = {
       about: {
         title: "À propos",
         lead:
-          "Diplômée d'une Licence en Informatique, option Web et Design, à IT University, je développe des applications web et participe à l'évolution de projets métier concrets.",
+          "Développeuse Full-Stack Web Junior, diplômée d'une Licence en Informatique, option Web et Design, à IT University (2025). Je conçois et fais évoluer des applications web métier, du back-end à l'interface, en m'appuyant sur des technologies comme Symfony, PHP, Angular et TypeScript.",
         body:
-          "Au sein d'Adrware Consulting, j'ai contribué à la maintenance et à l'évolution d'applications existantes, au développement de nouvelles fonctionnalités, ainsi qu'à des projets web, backend et mobile. Je m'intéresse à l'apprentissage continu et aux bonnes pratiques de développement.",
+          "De septembre 2025 à mars 2026, chez Adrware Consulting, j'ai participé à la maintenance et à l'évolution d'applications existantes : correction de bugs, développement de nouvelles fonctionnalités, intégration d'API REST, exports de données et systèmes de billetterie. J'apprécie particulièrement les projets où je peux comprendre le besoin métier, proposer une solution technique claire et la livrer avec rigueur. Je suis aujourd'hui à la recherche d'un premier poste en CDI pour approfondir mes compétences et m'investir durablement dans une équipe.",
         qualitiesTitle: "Approche professionnelle",
         qualities:
-          "Collaborative et méthodique, j'aime avancer avec une équipe, partager les connaissances et m'adapter aux contextes techniques. Orientée résultats, je privilégie la clarté, la rigueur et l'amélioration continue.",
+          "Collaborative et méthodique, je m'intègre rapidement dans une équipe, partage volontiers mes connaissances et m'adapte aux contextes techniques. Orientée résultats, je privilégie la clarté du code, la rigueur et l'amélioration continue — des valeurs que j'applique aussi bien en autonomie qu'en travail collectif.",
         languagesTitle: "Langues",
         languages: [
+          { name: "Malgache", level: "Langue maternelle" },
           { name: "Français", level: "Niveau opérationnel B2" },
           { name: "Anglais", level: "Niveau intermédiaire B1" }
         ]
@@ -109,7 +111,7 @@ window.PORTFOLIO_CONTENT = {
       },
       experience: {
         title: "Expériences professionnelles",
-        subtitle: "Contributions au sein d'Adrware Consulting sur des applications métier.",
+        subtitle: "Contributions passées au sein d'Adrware Consulting sur des applications métier.",
         items: [
           {
             id: "ubix-solar",
@@ -117,6 +119,7 @@ window.PORTFOLIO_CONTENT = {
             company: "Adrware Consulting",
             project: "UBIX-SOLAR",
             period: "Septembre 2025 – Mars 2026",
+            ended: true,
             technologies: ["Angular", "TypeScript", "Symfony", "PHP", "REST API"],
             description:
               "Application web métier destinée aux professionnels des installations photovoltaïques, existante et en constante évolution, à laquelle j'ai contribué au sein de l'équipe de développement.",
@@ -140,6 +143,7 @@ window.PORTFOLIO_CONTENT = {
             company: "Adrware Consulting",
             project: "AIOLIA-EVENT",
             period: "Octobre 2025 – Janvier 2026",
+            ended: true,
             technologies: ["Symfony", "PHP", "PostgreSQL", "REST API"],
             description:
               "Développement d'une application de gestion d'événements avec billetterie dynamique, au sein d'Adrware Consulting.",
@@ -316,7 +320,7 @@ window.PORTFOLIO_CONTENT = {
       contact: {
         title: "Contact",
         subtitle:
-          "Ouverte aux opportunités professionnelles. N'hésitez pas à me contacter pour échanger sur un projet ou un poste.",
+          "Actuellement disponible pour de nouvelles opportunités. N'hésitez pas à me contacter pour échanger sur un projet ou un poste.",
         emailLabel: "E-mail",
         phoneLabel: "Téléphone",
         locationLabel: "Localisation",
@@ -338,7 +342,7 @@ window.PORTFOLIO_CONTENT = {
       },
       footer: {
         rights: "Tous droits réservés.",
-        built: "Portfolio de développeuse Full-Stack."
+        built: "Portfolio de développeuse Full-Stack — disponible pour un premier CDI."
       },
       backToTop: "Retour en haut"
     },
@@ -361,8 +365,9 @@ window.PORTFOLIO_CONTENT = {
       },
       hero: {
         greeting: "Hello, I am",
+        title: "Junior Full-Stack Web Developer",
         tagline:
-          "Full-Stack Developer passionate about building web applications and integrating technical solutions. I enjoy understanding business requirements, solving problems, and contributing to the evolution of real-world projects as part of a team.",
+          "Junior full-stack developer, recently graduated with a Bachelor's degree in Computer Science (IT University, 2025). From September 2025 to March 2026, I contributed to business web applications at Adrware Consulting — Symfony, Angular, TypeScript, REST APIs, PDF/Excel exports, and dynamic ticketing. Curious, rigorous, and team-oriented, I am now looking for a first permanent position to keep learning and deliver concrete solutions.",
         ctaProjects: "View my projects",
         ctaContact: "Contact me",
         ctaCv: "Download my CV",
@@ -372,14 +377,15 @@ window.PORTFOLIO_CONTENT = {
       about: {
         title: "About",
         lead:
-          "Holding a Bachelor's degree in Computer Science, Web and Design track, from IT University, I build web applications and contribute to real-world business projects.",
+          "Junior Full-Stack Web Developer with a Bachelor's degree in Computer Science, Web and Design track, from IT University (2025). I design and evolve business web applications, from backend to interface, using technologies such as Symfony, PHP, Angular, and TypeScript.",
         body:
-          "At Adrware Consulting, I contributed to maintaining and evolving existing applications, developing new features, and working on web, backend, and mobile projects. I care about continuous learning and solid development practices.",
+          "From September 2025 to March 2026, at Adrware Consulting, I contributed to maintaining and evolving existing applications: bug fixing, new feature development, REST API integration, data exports, and ticketing systems. I particularly enjoy projects where I can understand the business need, propose a clear technical solution, and deliver it rigorously. I am now looking for a first permanent position to deepen my skills and invest sustainably in a team.",
         qualitiesTitle: "Professional approach",
         qualities:
-          "Collaborative and methodical, I enjoy working with a team, sharing knowledge, and adapting to technical contexts. Results-oriented, I value clarity, rigor, and continuous improvement.",
+          "Collaborative and methodical, I integrate quickly into a team, readily share knowledge, and adapt to technical contexts. Results-oriented, I value code clarity, rigor, and continuous improvement — values I apply both independently and in collective work.",
         languagesTitle: "Languages",
         languages: [
+          { name: "Malagasy", level: "Native language" },
           { name: "French", level: "Operational level B2" },
           { name: "English", level: "Intermediate level B1" }
         ]
@@ -431,7 +437,7 @@ window.PORTFOLIO_CONTENT = {
       },
       experience: {
         title: "Professional experience",
-        subtitle: "Contributions at Adrware Consulting on business applications.",
+        subtitle: "Past contributions at Adrware Consulting on business applications.",
         items: [
           {
             id: "ubix-solar",
@@ -439,6 +445,7 @@ window.PORTFOLIO_CONTENT = {
             company: "Adrware Consulting",
             project: "UBIX-SOLAR",
             period: "September 2025 – March 2026",
+            ended: true,
             technologies: ["Angular", "TypeScript", "Symfony", "PHP", "REST API"],
             description:
               "Business web application for photovoltaic installation professionals — an existing, evolving product I contributed to as part of the development team.",
@@ -462,6 +469,7 @@ window.PORTFOLIO_CONTENT = {
             company: "Adrware Consulting",
             project: "AIOLIA-EVENT",
             period: "October 2025 – January 2026",
+            ended: true,
             technologies: ["Symfony", "PHP", "PostgreSQL", "REST API"],
             description:
               "Development of an event management application with dynamic ticketing, at Adrware Consulting.",
@@ -638,7 +646,7 @@ window.PORTFOLIO_CONTENT = {
       contact: {
         title: "Contact",
         subtitle:
-          "Open to professional opportunities. Feel free to reach out to discuss a project or a role.",
+          "Currently available for new opportunities. Feel free to reach out to discuss a project or a role.",
         emailLabel: "Email",
         phoneLabel: "Phone",
         locationLabel: "Location",
@@ -660,7 +668,7 @@ window.PORTFOLIO_CONTENT = {
       },
       footer: {
         rights: "All rights reserved.",
-        built: "Full-Stack developer portfolio."
+        built: "Full-Stack developer portfolio — available for a first permanent position."
       },
       backToTop: "Back to top"
     }
